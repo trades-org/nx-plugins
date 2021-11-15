@@ -15,7 +15,7 @@ provider:
     shouldStartNameWithService: true
   environment:
     NODE_ENV: ${opt:stage, 'dev'}
-  
+
 custom:
   stage: ${opt:serviceStage, 'dev'}
   bundle:
@@ -34,6 +34,6 @@ functions:
           path: /foo
 
 plugins:
-  - serverless-bundle
+  - '@trades-org/serverless-bundle'
   - serverless-offline
   - serverless-deployment-bucket
