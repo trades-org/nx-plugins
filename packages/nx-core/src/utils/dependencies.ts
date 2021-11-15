@@ -41,7 +41,7 @@ export const devDependencies = {
   serverless: '^2.39.0',
   '@trades-org/serverless-bundle': '5.0.3',
   'serverless-offline': '^7.0.0',
-  'serverless-deployment-bucket': '^5.2.0',
+  'serverless-deployment-bucket': '^1.5.1',
   'ts-jest': '26.4.0',
   'ts-node': '~9.1.1',
   tslib: '^2.0.0',
