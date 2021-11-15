@@ -15,11 +15,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ns3/nx-core": ["packages/nx-core"],
-      "@ns3/nx-core/*": ["packages/nx-core/*"],
-      "@ns3/nx-jest-playwright": ["packages/nx-jest-playwright"],
-      "@ns3/nx-npm": ["packages/nx-npm"],
-      "@ns3/nx-serverless": ["packages/nx-serverless"]
+      "@trades-org/nx-core": ["packages/nx-core"],
+      "@trades-org/nx-core/*": ["packages/nx-core/*"],
+      "@trades-org/nx-jest-playwright": ["packages/nx-jest-playwright"],
+      "@trades-org/nx-npm": ["packages/nx-npm"],
+      "@trades-org/nx-serverless": ["packages/nx-serverless"]
     }
   },
   "exclude": ["node_modules", "tmp"]

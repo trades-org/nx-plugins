@@ -7,13 +7,13 @@ It is configured to support nx cache out of the box for build and deploy command
 ## Install
 
 ```
-npm i -D @ns3/nx-serverless
+npm i -D @trades-org/nx-serverless
 ```
 
 ## Generate
 
 ```
-nx generate @ns3/nx-serverless:app my-app-name
+nx generate @trades-org/nx-serverless:app my-app-name
 ```
 
 ## Custom commands

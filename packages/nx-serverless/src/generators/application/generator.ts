@@ -7,7 +7,7 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { normalizeOptions } from '@ns3/nx-core';
+import { normalizeOptions } from '@trades-org/nx-core';
 import { join } from 'path';
 import serverlessInitGenerator from '../init/generator';
 import { addJest } from './lib/add-jest';
@@ -32,27 +32,27 @@ export default async function (host: Tree, options: ServerlessGeneratorSchema) {
     sourceRoot: `${normalizedOptions.projectRoot}/src`,
     targets: {
       build: {
-        executor: '@ns3/nx-serverless:build',
+        executor: '@trades-org/nx-serverless:build',
         outputs: ['{options.outputPath}'],
         options: {
           outputPath,
         },
       },
       serve: {
-        executor: '@ns3/nx-serverless:serve',
+        executor: '@trades-org/nx-serverless:serve',
         options: {
           out,
         },
       },
       deploy: {
-        executor: '@ns3/nx-serverless:deploy',
+        executor: '@trades-org/nx-serverless:deploy',
         outputs: ['{options.outputPath}'],
         options: {
           outputPath,
         },
       },
       remove: {
-        executor: '@ns3/nx-serverless:remove',
+        executor: '@trades-org/nx-serverless:remove',
       },
     },
     tags: normalizedOptions.parsedTags,

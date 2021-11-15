@@ -49,7 +49,7 @@
       }
     },
     "publish": {
-      "executor": "@ns3/nx-npm:publish"
+      "executor": "@trades-org/nx-npm:publish"
     }
   },
   "tags": []

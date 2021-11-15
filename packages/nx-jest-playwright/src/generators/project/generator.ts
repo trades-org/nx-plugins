@@ -7,7 +7,7 @@ import {
   Tree,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { normalizeOptions } from '@ns3/nx-core';
+import { normalizeOptions } from '@trades-org/nx-core';
 import * as path from 'path';
 import jestPlaywrightInitGenerator from '../init/generator';
 import { addLinting } from './lib/add-linting';
@@ -25,7 +25,7 @@ export default async function (host: Tree, options: NxJestPlaywrightGeneratorSch
     projectType: 'application',
     targets: {
       e2e: {
-        executor: '@ns3/nx-jest-playwright:jest-playwright',
+        executor: '@trades-org/nx-jest-playwright:jest-playwright',
         options: {
           devServerTarget: options.project ? `${options.project}:serve` : undefined,
           jestConfig: `${normalizedOptions.projectRoot}/jest.config.js`,

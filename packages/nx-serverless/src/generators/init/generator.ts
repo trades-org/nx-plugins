@@ -2,13 +2,13 @@ import { addDependenciesToPackageJson, formatFiles, GeneratorCallback, Tree } fr
 import { jestInitGenerator } from '@nrwl/jest';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
 import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
-import { dependencies, devDependencies } from '@ns3/nx-core';
+import { dependencies, devDependencies } from '@trades-org/nx-core';
 import { InitGeneratorSchema } from './schema';
 
 export default async function serverlessInitGenerator(host: Tree, options: InitGeneratorSchema) {
   const tasks: GeneratorCallback[] = [];
 
-  setDefaultCollection(host, '@ns3/nx-serverless');
+  setDefaultCollection(host, '@trades-org/nx-serverless');
   updateGitignore(host);
 
   if (!options.unitTestRunner || options.unitTestRunner === 'jest') {
@@ -33,10 +33,11 @@ function updateDependencies(host: Tree) {
       'serverless-http': dependencies['serverless-http'],
     },
     {
-      '@ns3/nx-serverless': '*',
+      '@trades-org/nx-serverless': '*',
       serverless: devDependencies['serverless'],
-      'serverless-bundle': devDependencies['serverless-bundle'],
+      '@trades-org/serverless-bundle': devDependencies['@trades-org/serverless-bundle'],
       'serverless-offline': devDependencies['serverless-offline'],
+      'serverless-deployment-bucket': devDependencies['serverless-deployment-bucket'],
     },
   );
 }

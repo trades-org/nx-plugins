@@ -1,7 +1,7 @@
 import { addDependenciesToPackageJson, formatFiles, Tree, updateJson } from '@nrwl/devkit';
 import { jestInitGenerator } from '@nrwl/jest';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { devDependencies } from '@ns3/nx-core';
+import { devDependencies } from '@trades-org/nx-core';
 import { InitGeneratorSchema } from './schema';
 
 export default async function jestPlaywrightInitGenerator(
@@ -10,7 +10,7 @@ export default async function jestPlaywrightInitGenerator(
 ) {
   updateJson(host, 'package.json', (json) => {
     json.dependencies = json.dependencies || {};
-    delete json.dependencies['@ns3/nx-jest-playwright'];
+    delete json.dependencies['@trades-org/nx-jest-playwright'];
 
     return json;
   });
@@ -21,7 +21,7 @@ export default async function jestPlaywrightInitGenerator(
     host,
     {},
     {
-      ['@ns3/nx-jest-playwright']: '*',
+      ['@trades-org/nx-jest-playwright']: '*',
       'jest-playwright-preset': devDependencies['jest-playwright-preset'],
       playwright: devDependencies['playwright'],
     },

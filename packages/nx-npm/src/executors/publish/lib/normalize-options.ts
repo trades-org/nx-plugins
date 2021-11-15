@@ -1,6 +1,6 @@
 import { ExecutorContext } from '@nrwl/devkit';
 import { readNxJson } from '@nrwl/workspace';
-import { getProjectConfiguration } from '@ns3/nx-core';
+import { getProjectConfiguration } from '@trades-org/nx-core';
 import { PublishExecutorNormalizedSchema, PublishExecutorSchema } from '../schema';
 
 export async function normalizeOptions(

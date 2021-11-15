@@ -2,11 +2,11 @@ import { ensureNxProject, runCommandAsync, runNxCommandAsync } from '@nrwl/nx-pl
 
 describe('core e2e', () => {
   beforeAll(() => {
-    ensureNxProject('@ns3/nx-core', 'dist/packages/nx-core');
+    ensureNxProject('@trades-org/nx-core', 'dist/packages/nx-core');
   });
 
   it('should run generator', async () => {
     await runCommandAsync(`git init`);
-    await runNxCommandAsync(`generate @ns3/nx-core:repository`);
+    await runNxCommandAsync(`generate @trades-org/nx-core:repository`);
   });
 });

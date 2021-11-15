@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/schema",
   "cli": "nx",
   "id": "NxJestPlaywrightInit",
-  "title": "Initialize the @ns3/nx-jest-playwright plugin",
+  "title": "Initialize the @trades-org/nx-jest-playwright plugin",
   "type": "object",
   "properties": {
     "skipFormat": {

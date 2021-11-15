@@ -1,6 +1,6 @@
 import { ExecutorContext } from '@nrwl/devkit';
 import runCommands from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
-import { getProjectConfiguration, stringifyArgs } from '@ns3/nx-core';
+import { getProjectConfiguration, stringifyArgs } from '@trades-org/nx-core';
 import { preventPackage } from '../../utils/prevent-package';
 import { printCommand } from '../../utils/print-command';
 import { runSlsHelp } from '../../utils/run-sls-help';

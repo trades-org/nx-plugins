@@ -1,5 +1,5 @@
 import { ExecutorContext } from '@nrwl/devkit';
-import { execProcess, getProjectConfiguration, log } from '@ns3/nx-core';
+import { execProcess, getProjectConfiguration, log } from '@trades-org/nx-core';
 import { VersionExecutorSchema } from './schema';
 
 export default async function runExecutor(

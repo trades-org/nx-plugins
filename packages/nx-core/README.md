@@ -7,11 +7,11 @@ Generators are very specific for my use cases, but you mat use it if you find th
 ## Install
 
 ```
-npm i -D @ns3/nx-serverless
+npm i -D @trades-org/nx-serverless
 ```
 
 ## Generate
 
 ```
-nx generate @ns3/nx-core:repo
+nx generate @trades-org/nx-core:repo
 ```

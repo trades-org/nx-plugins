@@ -1,17 +1,17 @@
 import { checkFilesExist, readJson, runNxCommandAsync, uniq } from '@nrwl/nx-plugin/testing';
-import { ensureComplexNxProject } from '@ns3/nx-core/src/testing-utils/ensure-complex-nx-project';
+import { ensureComplexNxProject } from '@trades-org/nx-core/src/testing-utils/ensure-complex-nx-project';
 
 describe('serverless e2e', () => {
   beforeAll(() => {
     ensureComplexNxProject(
-      ['@ns3/nx-serverless', 'dist/packages/nx-serverless'],
-      ['@ns3/nx-core', 'dist/packages/nx-core'],
+      ['@trades-org/nx-serverless', 'dist/packages/nx-serverless'],
+      ['@trades-org/nx-core', 'dist/packages/nx-core'],
     );
   });
 
   it('should create serverless', async () => {
     const plugin = uniq('nx-serverless');
-    await runNxCommandAsync(`generate @ns3/nx-serverless:application ${plugin}`);
+    await runNxCommandAsync(`generate @trades-org/nx-serverless:application ${plugin}`);
 
     const buildResult = await runNxCommandAsync(`build ${plugin}`);
     expect(buildResult.stdout).toContain('Running: sls package');
@@ -24,7 +24,7 @@ describe('serverless e2e', () => {
     it('should create src in the specified directory', async () => {
       const plugin = uniq('serverless');
       await runNxCommandAsync(
-        `generate @ns3/nx-serverless:application ${plugin} --directory subdir`,
+        `generate @trades-org/nx-serverless:application ${plugin} --directory subdir`,
       );
       expect(() => checkFilesExist(`apps/subdir/${plugin}/src/handlers/foo.ts`)).not.toThrow();
     });
@@ -34,7 +34,7 @@ describe('serverless e2e', () => {
     it('should add tags to project.json', async () => {
       const plugin = uniq('serverless');
       await runNxCommandAsync(
-        `generate @ns3/nx-serverless:application ${plugin} --tags e2etag,e2ePackage`,
+        `generate @trades-org/nx-serverless:application ${plugin} --tags e2etag,e2ePackage`,
       );
       const projectJson = readJson(`apps/${plugin}/project.json`);
       expect(projectJson.tags).toEqual(['e2etag', 'e2ePackage']);

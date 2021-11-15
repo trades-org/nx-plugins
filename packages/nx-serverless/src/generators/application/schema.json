@@ -34,7 +34,7 @@
     "port": {
       "type": "number",
       "description": "Port to listen on.",
-      "default": 3333
+      "default": 3000
     },
     "js": {
       "type": "boolean",

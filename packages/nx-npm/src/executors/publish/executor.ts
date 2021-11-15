@@ -1,5 +1,5 @@
 import { ExecutorContext, joinPathFragments } from '@nrwl/devkit';
-import { execProcess, spawnProcess } from '@ns3/nx-core';
+import { execProcess, spawnProcess } from '@trades-org/nx-core';
 import { readJson, writeJson } from 'fs-extra';
 import { normalizeOptions } from './lib/normalize-options';
 import { PublishExecutorNormalizedSchema, PublishExecutorSchema } from './schema';

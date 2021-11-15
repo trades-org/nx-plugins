@@ -1,10 +1,10 @@
 {
-  "name": "@ns3/nx-core",
-  "version": "0.0.1",
+  "name": "@trades-org/nx-core",
+  "version": "0.0.2",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Bielik20/nx-plugins"
+    "url": "https://github.com/trades-org/nx-plugins"
   },
   "publishConfig": {
     "access": "public"

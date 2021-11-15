@@ -11,7 +11,7 @@
     "init": {
       "factory": "./src/generators/init/generator",
       "schema": "./src/generators/init/schema.json",
-      "description": "Initialize the @ns3/nx-jest-playwright plugin"
+      "description": "Initialize the @trades-org/nx-jest-playwright plugin"
     }
   }
 }

@@ -2,7 +2,7 @@ import { ExecutorContext } from '@nrwl/devkit';
 
 export const testContext: ExecutorContext = {
   root: '/base/ns3/tmp/nx-e2e/proj',
-  target: { executor: '@ns3/nx-serverless:build' },
+  target: { executor: '@trades-org/nx-serverless:build' },
   workspace: {
     npmScope: '@scope',
     version: 2,
@@ -11,7 +11,7 @@ export const testContext: ExecutorContext = {
         root: 'apps/serverless839554',
         projectType: 'library',
         sourceRoot: 'apps/serverless839554/src',
-        targets: { build: { executor: '@ns3/nx-serverless:build' } },
+        targets: { build: { executor: '@trades-org/nx-serverless:build' } },
       },
     },
     cli: { defaultCollection: '@nrwl/workspace' },

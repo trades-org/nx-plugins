@@ -8,7 +8,7 @@ import {
 } from '@nrwl/devkit';
 import { Linter } from '@nrwl/linter';
 import pluginGenerator from '@nrwl/nx-plugin/src/generators/plugin/plugin';
-import npmGenerator from '@ns3/nx-npm/src/generators/npm/generator';
+import npmGenerator from '@trades-org/nx-npm/src/generators/npm/generator';
 import { Schema } from './schema';
 
 export default async function (host: Tree, schema: Schema) {
@@ -20,7 +20,7 @@ export default async function (host: Tree, schema: Schema) {
     standaloneConfig: true,
     unitTestRunner: 'jest',
     linter: Linter.EsLint,
-    importPath: `@ns3/${schema.name}`,
+    importPath: `@trades-org/${schema.name}`,
   });
   await adjustGeneratedProject(host, { project: schema.name });
   await npmGenerator(host, { project: schema.name, skipFormat: true, access: 'public' });
@@ -55,7 +55,7 @@ function adjustGeneratedProject(tree: Tree, schema: { project: string }) {
   });
 
   updateJson(tree, 'tsconfig.base.json', (json) => {
-    json.compilerOptions.paths[`@ns3/${schema.project}`] = [projectConfig.root];
+    json.compilerOptions.paths[`@trades-org/${schema.project}`] = [projectConfig.root];
 
     return json;
   });

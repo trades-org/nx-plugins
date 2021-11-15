@@ -1,9 +1,21 @@
-service: <%= name %>
+service: trades-org-<%= name %>
 
-plugins:
-  - serverless-bundle
-  - serverless-offline
-
+provider:
+  name: aws
+  runtime: nodejs12.x
+  logRetentionInDays: 14
+  endpointType: regional
+  timeout: 30
+  region: us-east-1
+  deploymentBucket:
+    name: refresh-sls-deployment
+    serverSideEncryption: AES256
+  lambdaHashingVersion: 20201221
+  apiGateway:
+    shouldStartNameWithService: true
+  environment:
+    NODE_ENV: ${opt:stage, 'dev'}
+  
 custom:
   stage: ${opt:serviceStage, 'dev'}
   bundle:
@@ -11,25 +23,17 @@ custom:
     tsConfig: 'tsconfig.app.json'
   serverless-offline:
     httpPort: <%= port %>
-    noPrependStageInUrl: true
-
-provider:
-  name: aws
-  runtime: nodejs12.x
-  stage: ${self:custom.stage}
-  endpointType: regional
-  timeout: 20
-  lambdaHashingVersion: 20201221 # removes deprecation warning (remove in serverless v3)
-  apiGateway:
-    shouldStartNameWithService: true # removes deprecation warning (remove in serverless v3)
-  environment:
-    APP_ENV: ${self:custom.stage}
-    IS_PRODUCTION: '${file(./src/environments/config.${self:custom.stage}.json):is_production}'
+    noPrependStageInUrl: false
 
 functions:
   foo:
-    handler: src/handlers/foo.handler
+    handler: handler.handler
     events:
       - http:
           method: GET
           path: /foo
+
+plugins:
+  - serverless-bundle
+  - serverless-offline
+  - serverless-deployment-bucket

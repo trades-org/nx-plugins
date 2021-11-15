@@ -6,13 +6,13 @@ It works similarly to cypress runner in a sense that you can pass either `devSer
 ## Install
 
 ```
-npm i -D @ns3/nx-jest-playwright
+npm i -D @trades-org/nx-jest-playwright
 ```
 
 ## Generate
 
 ```
-nx generate @ns3/nx-jest-playwright:project my-desktop-e2e --project my-destkop
+nx generate @trades-org/nx-jest-playwright:project my-desktop-e2e --project my-destkop
 ```
 
 Providing `project` flag will generate a config that targets this frontend application.
