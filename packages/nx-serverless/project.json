@@ -52,7 +52,6 @@
       "executor": "@trades-org/nx-npm:publish",
       "options": {
         "npmRegistry": "https://npm.pkg.github.com",
-        "npmToken": "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",
         "npmScope": "trades-org"
       }
     }
