@@ -1,12 +1,10 @@
 import { joinPathFragments, ProjectConfiguration } from '@nrwl/devkit';
 import { getBuildBaseConfig } from './get-build-base-config';
-import { getOutputPath } from './get-output-path';
 import { ServerlessGeneratorNormalizedSchema } from './normalized-options';
 
 export function getProjectConfig(
   options: ServerlessGeneratorNormalizedSchema,
 ): ProjectConfiguration {
-  const outputPath = getOutputPath(options);
   const buildTargetName = 'build';
   const buildTargetDev = `${options.name}:${buildTargetName}`;
   const buildTargetProd = `${buildTargetDev}:production`;
@@ -20,7 +18,7 @@ export function getProjectConfig(
       ...(options.plugin === '@trades-org/nx-serverless/plugin'
         ? { [buildTargetName]: buildBaseConfig }
         : {}),
-      serve: {
+      develop: {
         executor: '@trades-org/nx-serverless:sls',
         options: {
           command: 'offline',
@@ -31,7 +29,7 @@ export function getProjectConfig(
       },
       build: {
         executor: '@trades-org/nx-serverless:sls',
-        outputs: [outputPath, buildBaseConfig.options.outputPath],
+        outputs: [buildBaseConfig.options.outputPath],
         dependsOn: [
           {
             target: 'build',
@@ -43,11 +41,12 @@ export function getProjectConfig(
           ...(options.plugin === '@trades-org/nx-serverless/plugin'
             ? { buildTarget: buildTargetProd }
             : {}),
+          package: buildBaseConfig.options.outputPath,
         },
       },
       deploy: {
         executor: '@trades-org/nx-serverless:sls',
-        outputs: [outputPath, buildBaseConfig.options.outputPath],
+        outputs: [buildBaseConfig.options.outputPath],
         dependsOn: [
           {
             target: 'build',
@@ -56,11 +55,23 @@ export function getProjectConfig(
         ],
         options: {
           command: 'deploy',
-          //TODO: update this reference to trades.org-monorepo structure
-          package: '.serverless',
+          package: buildBaseConfig.options.outputPath,
+          force: true,
+          verbose: true,
           ...(options.plugin === '@trades-org/nx-serverless/plugin'
             ? { buildTarget: buildTargetProd }
             : {}),
+        },
+        configurations: {
+          production: {
+            stage: 'production',
+          },
+          staging: {
+            stage: 'staging',
+          },
+          dev: {
+            stage: 'dev',
+          },
         },
       },
       remove: {

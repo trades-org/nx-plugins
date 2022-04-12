@@ -1,0 +1,10 @@
+{
+  "name": "<%= name %>",
+  "version": "1.0.0",
+  "devDependencies": {
+    "serverless": "<%= serverlessVersion %>",
+    "serverless-deployment-bucket": "<%= serverlessDeploymentBucketVersion %>",
+    "serverless-offline": "<%= serverlessOfflineVersion %>",
+    "@trades-org/serverless-bundle": "<%= serverlessBundleVersion %>"
+  }
+}

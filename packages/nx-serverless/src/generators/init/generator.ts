@@ -24,8 +24,9 @@ export default async function serverlessInitGenerator(host: Tree, options: InitG
     tasks.push(jestTask);
   }
 
-  const installTask = updateDependencies(host, options);
-  tasks.push(installTask);
+  // Disable updating root monorepo dependencies
+  // const installTask = updateDependencies(host, options);
+  // tasks.push(installTask);
 
   if (!options.skipFormat) {
     await formatFiles(host);
@@ -43,7 +44,7 @@ function updateDependencies(host: Tree, options: InitGeneratorSchema) {
       serverless: devDependencies['serverless'],
       'serverless-offline': devDependencies['serverless-offline'],
       ...(options.plugin === 'serverless-bundle'
-        ? {'@trades-org/serverless-bundle': devDependencies['@trades-org/serverless-bundle'],}
+        ? { '@trades-org/serverless-bundle': devDependencies['@trades-org/serverless-bundle'] }
         : { '@nrwl/node': '*' }),
     },
   );
@@ -76,8 +77,8 @@ function addCacheableOperation(tree: Tree) {
 
   workspace.tasksRunnerOptions.default.options.cacheableOperations =
     workspace.tasksRunnerOptions.default.options.cacheableOperations || [];
-  if (!workspace.tasksRunnerOptions.default.options.cacheableOperations.includes('package')) {
-    workspace.tasksRunnerOptions.default.options.cacheableOperations.push('package');
+  if (!workspace.tasksRunnerOptions.default.options.cacheableOperations.includes('build')) {
+    workspace.tasksRunnerOptions.default.options.cacheableOperations.push('build');
   }
   updateWorkspaceConfiguration(tree, workspace);
 }

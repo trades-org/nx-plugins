@@ -14,7 +14,7 @@ export default async function runExecutor(options: SlsExecutorSchema, context: E
     ...rest,
     ...(showHelp ? { help: true } : {}),
   });
-  const fullCommand = `npx sls ${command} ${stringifiedArgs}`.trim();
+  const fullCommand = `yarn sls ${command} ${stringifiedArgs}`.trim();
 
   printCommand(fullCommand);
   const result = await execa.command(fullCommand, {

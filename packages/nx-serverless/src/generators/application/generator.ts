@@ -8,7 +8,7 @@ import {
   updateJson,
 } from '@nrwl/devkit';
 import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { normalizeOptions } from '@trades-org/nx-core';
+import { devDependencies, normalizeOptions } from '@trades-org/nx-core';
 import { join } from 'path';
 import serverlessInitGenerator from '../init/generator';
 import { addJest } from './lib/add-jest';
@@ -44,6 +44,10 @@ function addFiles(host: Tree, options: ServerlessGeneratorNormalizedSchema) {
     ...names(options.projectName),
     offsetFromRoot: offsetFromRoot(options.projectRoot),
     tmpl: '',
+    serverlessVersion: devDependencies['serverless'],
+    serverlessDeploymentBucketVersion: devDependencies['serverless-deployment-bucket'],
+    serverlessOfflineVersion: devDependencies['serverless-offline'],
+    serverlessBundleVersion: devDependencies['@trades-org/serverless-bundle'],
   };
 
   generateFiles(host, join(__dirname, 'files'), options.projectRoot, templateOptions);
