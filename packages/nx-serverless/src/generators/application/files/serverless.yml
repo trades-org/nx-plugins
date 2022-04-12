@@ -16,11 +16,11 @@ provider:
   environment:
     NODE_ENV: ${opt:stage, 'dev'}
 
+package:
+  individually: true
+
 custom:
-  stage: ${opt:serviceStage, 'dev'}
-  bundle:
-    linting: false
-    tsConfig: 'tsconfig.app.json'
+  stage: ${opt:stage, 'dev'}
   serverless-offline:
     httpPort: <%= port %>
     noPrependStageInUrl: false
