@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "Serverless executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "Command to run."
+    },
+    "buildTarget": {
+      "type": "string",
+      "description": "In case of using @trades-org/nx-serverless/plugin instruct what to run to compile the code."
+    },
+    "showHelp": {
+      "type": "boolean",
+      "description": "Show sls help for that command.",
+      "default": false
+    }
+  },
+  "required": ["command"]
+}

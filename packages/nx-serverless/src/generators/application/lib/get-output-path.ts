@@ -1,6 +1,6 @@
+import { NormalizedOptions } from '@trades-org/nx-core';
 import { join } from 'path';
-import { ServerlessGeneratorNormalizedSchema } from './normalized-options';
 
-export function getOutputPath(options: ServerlessGeneratorNormalizedSchema) {
+export function getOutputPath(options: NormalizedOptions) {
   return join(options.projectRoot, '.serverless');
 }
