@@ -29,13 +29,13 @@ describe('serverless generator', () => {
         sourceRoot: 'apps/sample/src',
         targets: {
           serve: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             options: {
               command: 'offline',
             },
           },
           package: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             outputs: ['apps/sample/.serverless', 'dist/apps/sample'],
             dependsOn: [
               {
@@ -48,7 +48,7 @@ describe('serverless generator', () => {
             },
           },
           deploy: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             outputs: ['apps/sample/.serverless', 'dist/apps/sample'],
             dependsOn: [
               {
@@ -62,13 +62,13 @@ describe('serverless generator', () => {
             },
           },
           remove: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             options: {
               command: 'remove',
             },
           },
           sls: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             options: {},
           },
           test: {
@@ -92,9 +92,9 @@ describe('serverless generator', () => {
     });
   });
 
-  describe('@ns3/nx-serverless/plugin', () => {
+  describe('@trades-org/nx-serverless/plugin', () => {
     const options: ServerlessGeneratorSchema = {
-      plugin: '@ns3/nx-serverless/plugin',
+      plugin: '@trades-org/nx-serverless/plugin',
       name: 'sample',
       unitTestRunner: 'jest',
       linter: Linter.EsLint,
@@ -129,14 +129,14 @@ describe('serverless generator', () => {
             },
           },
           serve: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             options: {
               command: 'offline',
               buildTarget: 'sample:build',
             },
           },
           package: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             outputs: ['apps/sample/.serverless', 'dist/apps/sample'],
             dependsOn: [
               {
@@ -150,7 +150,7 @@ describe('serverless generator', () => {
             },
           },
           deploy: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             outputs: ['apps/sample/.serverless', 'dist/apps/sample'],
             dependsOn: [
               {
@@ -165,13 +165,13 @@ describe('serverless generator', () => {
             },
           },
           remove: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             options: {
               command: 'remove',
             },
           },
           sls: {
-            executor: '@ns3/nx-serverless:sls',
+            executor: '@trades-org/nx-serverless:sls',
             options: {},
           },
           test: {

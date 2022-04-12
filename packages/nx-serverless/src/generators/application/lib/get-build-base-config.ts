@@ -1,5 +1,5 @@
 import { joinPathFragments, TargetConfiguration } from '@nrwl/devkit';
-import { NormalizedOptions } from '@ns3/nx-core';
+import { NormalizedOptions } from '@trades-org/nx-core';
 
 export function getBuildBaseConfig(options: NormalizedOptions): TargetConfiguration {
   return {

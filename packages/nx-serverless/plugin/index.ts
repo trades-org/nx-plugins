@@ -74,7 +74,7 @@ class NxServerlessPlugin {
 
   private printExperimentalWarning() {
     this.logging.log.warning(
-      '"@ns3/nx-serverless/plugin" is experimental and can change without a major release.',
+      '"@trades-org/nx-serverless/plugin" is experimental and can change without a major release.',
     );
   }
 }

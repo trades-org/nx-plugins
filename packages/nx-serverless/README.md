@@ -21,16 +21,16 @@ It supports all providers, nx cache as far as output of serverless bundle is con
 nx generate @trades-org/nx-serverless:app my-app-name
 ```
 
-### `@ns3/nx-serverless/plugin`
+### `@trades-org/nx-serverless/plugin`
 
-You can opt in to use experimental `@ns3/nx-serverless/plugin`.
+You can opt in to use experimental `@trades-org/nx-serverless/plugin`.
 It supports only `aws` as a provider, but works both with nx cache and incremental build.
 It uses `@nrwl/node:build` executor to compile the code.
 It also means that it will respect `target` you set in `tsconfig.json`.
 You can use `externalDependencies` option of `build-base` target to exclude certain dependencies from the bundle (like aws sdk).
 
 ```
-nx generate @ns3/nx-serverless:app my-app-name --plugin @ns3/nx-serverless/plugin
+nx generate @trades-org/nx-serverless:app my-app-name --plugin @trades-org/nx-serverless/plugin
 ```
 
 ## Available commands

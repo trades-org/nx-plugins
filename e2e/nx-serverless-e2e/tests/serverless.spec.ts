@@ -23,7 +23,7 @@ describe('serverless e2e', () => {
     });
   });
 
-  describe('@ns3/nx-serverless/plugin', () => {
+  describe('@trades-org/nx-serverless/plugin', () => {
     it('should create serverless', async () => {
       const plugin = uniq('nx-serverless');
       await runNxCommandAsync(

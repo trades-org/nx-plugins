@@ -1,7 +1,7 @@
 import { ExecutorContext } from '@nrwl/devkit';
 
 export const testContext: ExecutorContext = {
-  root: '/base/ns3/tmp/nx-e2e/proj',
+  root: '/base/trades.org/tmp/nx-e2e/proj',
   target: { executor: '@trades-org/nx-serverless:build' },
   workspace: {
     npmScope: '@scope',
@@ -19,6 +19,6 @@ export const testContext: ExecutorContext = {
   projectName: 'serverless839554',
   targetName: 'build',
   configurationName: undefined,
-  cwd: '/base/ns3/tmp/nx-e2e/proj',
+  cwd: '/base/trades.org/tmp/nx-e2e/proj',
   isVerbose: false,
 };

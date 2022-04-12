@@ -8,7 +8,10 @@
     "plugin": {
       "description": "Which plugin you want to use within serverless",
       "type": "string",
-      "enum": ["serverless-bundle", "@ns3/nx-serverless/plugin"],
+      "enum": [
+        "serverless-bundle",
+        "@trades-org/nx-serverless/plugin"
+      ],
       "default": "serverless-bundle"
     },
     "unitTestRunner": {

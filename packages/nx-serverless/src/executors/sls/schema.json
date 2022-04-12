@@ -11,7 +11,7 @@
     },
     "buildTarget": {
       "type": "string",
-      "description": "In case of using @ns3/nx-serverless/plugin instruct what to run to compile the code."
+      "description": "In case of using @trades-org/nx-serverless/plugin instruct what to run to compile the code."
     },
     "showHelp": {
       "type": "boolean",

@@ -1,7 +1,7 @@
 import { Linter } from '@nrwl/linter';
 
 export interface ServerlessGeneratorSchema {
-  plugin: 'serverless-bundle' | '@ns3/nx-serverless/plugin';
+  plugin: 'serverless-bundle' | '@trades-org/nx-serverless/plugin';
   name: string;
   tags?: string;
   directory?: string;

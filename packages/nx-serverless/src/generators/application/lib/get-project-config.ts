@@ -17,20 +17,20 @@ export function getProjectConfig(
     projectType: 'application',
     sourceRoot: joinPathFragments(options.projectRoot, 'src'),
     targets: {
-      ...(options.plugin === '@ns3/nx-serverless/plugin'
+      ...(options.plugin === '@trades-org/nx-serverless/plugin'
         ? { [buildTargetName]: buildBaseConfig }
         : {}),
       serve: {
-        executor: '@ns3/nx-serverless:sls',
+        executor: '@trades-org/nx-serverless:sls',
         options: {
           command: 'offline',
-          ...(options.plugin === '@ns3/nx-serverless/plugin'
+          ...(options.plugin === '@trades-org/nx-serverless/plugin'
             ? { buildTarget: buildTargetDev }
             : {}),
         },
       },
-      package: {
-        executor: '@ns3/nx-serverless:sls',
+      build: {
+        executor: '@trades-org/nx-serverless:sls',
         outputs: [outputPath, buildBaseConfig.options.outputPath],
         dependsOn: [
           {
@@ -40,36 +40,37 @@ export function getProjectConfig(
         ],
         options: {
           command: 'package',
-          ...(options.plugin === '@ns3/nx-serverless/plugin'
+          ...(options.plugin === '@trades-org/nx-serverless/plugin'
             ? { buildTarget: buildTargetProd }
             : {}),
         },
       },
       deploy: {
-        executor: '@ns3/nx-serverless:sls',
+        executor: '@trades-org/nx-serverless:sls',
         outputs: [outputPath, buildBaseConfig.options.outputPath],
         dependsOn: [
           {
-            target: 'package',
+            target: 'build',
             projects: 'self',
           },
         ],
         options: {
           command: 'deploy',
+          //TODO: update this reference to trades.org-monorepo structure
           package: '.serverless',
-          ...(options.plugin === '@ns3/nx-serverless/plugin'
+          ...(options.plugin === '@trades-org/nx-serverless/plugin'
             ? { buildTarget: buildTargetProd }
             : {}),
         },
       },
       remove: {
-        executor: '@ns3/nx-serverless:sls',
+        executor: '@trades-org/nx-serverless:sls',
         options: {
           command: 'remove',
         },
       },
       sls: {
-        executor: '@ns3/nx-serverless:sls',
+        executor: '@trades-org/nx-serverless:sls',
         options: {},
       },
     },

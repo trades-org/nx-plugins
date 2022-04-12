@@ -1,4 +1,4 @@
-import { NormalizedOptions } from '@ns3/nx-core';
+import { NormalizedOptions } from '@trades-org/nx-core';
 import { join } from 'path';
 
 export function getOutputPath(options: NormalizedOptions) {
