@@ -17,6 +17,11 @@
       "type": "boolean",
       "description": "Show sls help for that command.",
       "default": false
+    },
+    "useYarnPrefix": {
+      "type": "boolean",
+      "description": "Use yarn prefix for the command. False by default for Yarn PnP support.",
+      "default": false
     }
   },
   "required": ["command"]

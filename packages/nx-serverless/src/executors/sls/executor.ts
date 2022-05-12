@@ -7,14 +7,14 @@ import { printCommand } from '../../utils/print-command';
 import { SlsExecutorSchema } from './schema';
 
 export default async function runExecutor(options: SlsExecutorSchema, context: ExecutorContext) {
-  const { showHelp, buildTarget, command, env = process.env, ...rest } = options;
+  const { showHelp, buildTarget, command, env = process.env, useYarnPrefix, ...rest } = options;
   const IS_CI_RUN = process.env.CI === 'true';
   const projectRoot = getProjectConfiguration(context).root;
   const stringifiedArgs = stringifyArgs({
     ...rest,
     ...(showHelp ? { help: true } : {}),
   });
-  const fullCommand = `yarn sls ${command} ${stringifiedArgs}`.trim();
+  const fullCommand = `${useYarnPrefix ? 'yarn' : ''} sls ${command} ${stringifiedArgs}`.trim();
 
   printCommand(fullCommand);
   const result = await execa.command(fullCommand, {
