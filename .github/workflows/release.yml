@@ -91,4 +91,5 @@ jobs:
           NPM_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npx nx run nx-serverless:release
-          npx semantic-release-plus
+      - name: Finish Release
+        run: npx semantic-release-plus

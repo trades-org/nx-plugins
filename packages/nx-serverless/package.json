@@ -4,7 +4,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/trades-org/nx-plugins"
+    "url": "https://github.com/trades-org/nx-plugins.git",
+    "directory": "packages/nx-serverless"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
