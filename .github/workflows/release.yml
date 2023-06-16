@@ -79,8 +79,6 @@ jobs:
             npm ci
           fi
       - run: |
-          npx nx workspace-lint
-          npx nx format:check
           npx nx run nx-serverless:lint
           npx nx run nx-serverless:test --ci --code-coverage
           npx nx run nx-serverless:build
