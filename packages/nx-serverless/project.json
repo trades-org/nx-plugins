@@ -56,7 +56,7 @@
       }
     },
     "release": {
-      "executor": "nx:run-commands",
+      "executor": "@nrwl/workspace:run-commands",
       "outputs": [],
       "options": {
         "command": "npx semantic-release-plus --extends ./packages/nx-serverless/release.config.js",
