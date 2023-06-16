@@ -28,15 +28,15 @@ describe('serverless generator', () => {
         projectType: 'application',
         sourceRoot: 'apps/sample/src',
         targets: {
-          serve: {
+          develop: {
             executor: '@trades-org/nx-serverless:sls',
             options: {
               command: 'offline',
             },
           },
-          package: {
+          build: {
             executor: '@trades-org/nx-serverless:sls',
-            outputs: ['apps/sample/.serverless', 'dist/apps/sample'],
+            outputs: ['../../dist/apps/sample'],
             dependsOn: [
               {
                 target: 'build',
@@ -45,20 +45,34 @@ describe('serverless generator', () => {
             ],
             options: {
               command: 'package',
+              package: '../../dist/apps/sample',
             },
           },
           deploy: {
             executor: '@trades-org/nx-serverless:sls',
-            outputs: ['apps/sample/.serverless', 'dist/apps/sample'],
+            outputs: ['../../dist/apps/sample'],
             dependsOn: [
               {
-                target: 'package',
+                target: 'build',
                 projects: 'self',
               },
             ],
             options: {
               command: 'deploy',
-              package: '.serverless',
+              force: true,
+              package: '../../dist/apps/sample',
+              verbose: true,
+            },
+            configurations: {
+              production: {
+                stage: 'production',
+              },
+              staging: {
+                stage: 'staging',
+              },
+              dev: {
+                stage: 'dev',
+              },
             },
           },
           remove: {
@@ -110,58 +124,54 @@ describe('serverless generator', () => {
         projectType: 'application',
         sourceRoot: 'apps/sample/src',
         targets: {
-          build: {
-            executor: '@nrwl/node:webpack',
-            outputs: ['{options.outputPath}'],
-            options: {
-              outputPath: 'dist/apps/sample',
-              main: 'apps/sample/src/main.ts',
-              tsConfig: 'apps/sample/tsconfig.app.json',
-              externalDependencies: 'all',
-            },
-            configurations: {
-              production: {
-                optimization: true,
-                extractLicenses: true,
-                inspect: false,
-                externalDependencies: 'none',
-              },
-            },
-          },
-          serve: {
+          develop: {
             executor: '@trades-org/nx-serverless:sls',
             options: {
-              command: 'offline',
               buildTarget: 'sample:build',
+              command: 'offline',
             },
           },
-          package: {
+          build: {
             executor: '@trades-org/nx-serverless:sls',
-            outputs: ['apps/sample/.serverless', 'dist/apps/sample'],
+            outputs: ['../../dist/apps/sample'],
+            options: {
+              command: 'package',
+              package: '../../dist/apps/sample',
+              buildTarget: 'sample:build:production',
+            },
             dependsOn: [
               {
                 target: 'build',
                 projects: 'dependencies',
               },
             ],
-            options: {
-              command: 'package',
-              buildTarget: 'sample:build:production',
-            },
           },
           deploy: {
             executor: '@trades-org/nx-serverless:sls',
-            outputs: ['apps/sample/.serverless', 'dist/apps/sample'],
+            outputs: ['../../dist/apps/sample'],
             dependsOn: [
               {
-                target: 'package',
+                target: 'build',
                 projects: 'self',
               },
             ],
             options: {
               command: 'deploy',
-              package: '.serverless',
+              force: true,
+              package: '../../dist/apps/sample',
+              verbose: true,
               buildTarget: 'sample:build:production',
+            },
+            configurations: {
+              production: {
+                stage: 'production',
+              },
+              staging: {
+                stage: 'staging',
+              },
+              dev: {
+                stage: 'dev',
+              },
             },
           },
           remove: {
