@@ -4,7 +4,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/trades-org/nx-plugins"
+    "url": "https://github.com/trades-org/nx-plugins.git"
   },
   "scripts": {
     "postinstall": "npm run tools",
@@ -42,6 +42,8 @@
     "fs-extra": "^10.0.1",
     "glob": "^7.2.0",
     "lodash": "^4.17.20",
+    "semantic-release-npm-github-publish": "^1.5.4",
+    "semantic-release-plus": "^20.0.0",
     "yargs": "^17.4.0"
   },
   "devDependencies": {

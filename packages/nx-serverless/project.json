@@ -54,6 +54,14 @@
         "npmRegistry": "https://npm.pkg.github.com",
         "npmScope": "trades-org"
       }
+    },
+    "release": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "npx semantic-release-plus --extends ./packages/nx-serverless/release.config.js",
+        "parallel": false
+      }
     }
   },
   "tags": []
