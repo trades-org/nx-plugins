@@ -8,7 +8,6 @@
     "directory": "packages/nx-serverless"
   },
   "publishConfig": {
-    "access": "public",
     "registry": "https://npm.pkg.github.com/trades-org"
   },
   "main": "index.js",
