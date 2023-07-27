@@ -16,10 +16,6 @@
     "infisicalEnv":{
       "type": "string",
       "description": "Environment where fetch the secrets"
-    },
-    "env":{
-      "type": "string",
-      "description": "Environment variables"
     }
   },
   "required": ["command", "infisicalPath", "infisicalEnv"]
