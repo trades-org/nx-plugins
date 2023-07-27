@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "title": "SlsInfisical executor",
+  "description": "",
+  "type": "object",
+  "properties": {
+    "command": {
+      "type": "string",
+      "description": "Serverless command to run."
+    },
+    "infisicalPath":{
+      "type": "string",
+      "description": "Path project where fetch the secrets"
+    },
+    "infisicalEnv":{
+      "type": "string",
+      "description": "Environment where fetch the secrets"
+    },
+    "env":{
+      "type": "string",
+      "description": "Environment variables"
+    }
+  },
+  "required": ["command", "infisicalPath", "infisicalEnv"]
+}

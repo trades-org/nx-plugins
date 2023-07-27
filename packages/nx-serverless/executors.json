@@ -25,6 +25,11 @@
       "implementation": "./src/executors/sls/executor",
       "schema": "./src/executors/sls/schema.json",
       "description": "sls executor"
+    },
+    "sls-infisical": {
+      "implementation": "./src/executors/sls-infisical/executor",
+      "schema": "./src/executors/sls-infisical/schema.json",
+      "description": "sls-infisical executor"
     }
   }
 }
