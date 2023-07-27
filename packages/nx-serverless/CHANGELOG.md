@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/trades-org/nx-plugins/compare/nx-serverless-v1.1.0...nx-serverless-v1.1.1) (2023-07-27)
+
+
+### Bug Fixes
+
+* set appropriate env argument type for sls infisical generator ([1591fae](https://github.com/trades-org/nx-plugins/commit/1591fae961da213efd488b8178f347e4d1f623ff))
+
 # [1.1.0](https://github.com/trades-org/nx-plugins/compare/nx-serverless-v1.0.4...nx-serverless-v1.1.0) (2023-07-27)
 
 
