@@ -6,8 +6,8 @@ import {
   offsetFromRoot,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+} from '@nx/devkit';
+import { runTasksInSerial } from '@nx/devkit/src/generators/run-tasks-in-serial';
 import { devDependencies, normalizeOptions } from '@trades-org/nx-core';
 import { join } from 'path';
 import serverlessInitGenerator from '../init/generator';

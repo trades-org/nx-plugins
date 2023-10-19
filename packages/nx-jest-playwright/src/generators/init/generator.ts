@@ -1,6 +1,6 @@
-import { addDependenciesToPackageJson, formatFiles, Tree, updateJson } from '@nrwl/devkit';
-import { jestInitGenerator } from '@nrwl/jest';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+import { addDependenciesToPackageJson, formatFiles, Tree, updateJson } from '@nx/devkit';
+import { runTasksInSerial } from '@nx/devkit/src/generators/run-tasks-in-serial';
+import { jestInitGenerator } from '@nx/jest';
 import { devDependencies } from '@trades-org/nx-core';
 import { InitGeneratorSchema } from './schema';
 
@@ -15,7 +15,7 @@ export default async function jestPlaywrightInitGenerator(
     return json;
   });
 
-  const jestTask = jestInitGenerator(host, { babelJest: false });
+  const jestTask = await jestInitGenerator(host, { babelJest: false });
 
   const installTask = addDependenciesToPackageJson(
     host,

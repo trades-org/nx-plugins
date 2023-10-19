@@ -1,17 +1,18 @@
 {
+  "name": "nx-npm-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "root": "e2e/nx-npm-e2e",
   "sourceRoot": "e2e/nx-npm-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
+      "executor": "@nx/plugin:e2e",
       "options": {
         "target": "nx-npm-e2e:prepare",
         "jestConfig": "e2e/nx-npm-e2e/jest.config.js"
       }
     },
     "prepare": {
-      "executor": "@nrwl/workspace:run-commands",
+      "executor": "nx:run-commands",
       "options": {
         "command": "nx run nx-npm:build --with-deps"
       }

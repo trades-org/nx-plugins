@@ -1,5 +1,5 @@
-import { runCommandAsync, runNxCommandAsync, tmpProjPath, uniq } from '@nrwl/nx-plugin/testing';
-import { getPackageManagerCommand } from '@nrwl/tao/src/shared/package-manager';
+import { runCommandAsync, runNxCommandAsync, tmpProjPath, uniq } from '@nx/plugin/testing';
+import { getPackageManagerCommand } from 'nx/src/utils/package-manager';
 import { ensureComplexNxProject } from '@trades-org/nx-core/src/testing-utils/ensure-complex-nx-project';
 import { readFileSync, writeFileSync } from 'fs';
 
@@ -10,7 +10,7 @@ describe('nx-npm e2e', () => {
       ['@trades-org/nx-core', 'dist/packages/nx-core'],
     );
     const pmc = getPackageManagerCommand();
-    await runCommandAsync(`${pmc.addDev} @nrwl/node`);
+    await runCommandAsync(`${pmc.addDev} @nx/node`);
     const p = JSON.parse(readFileSync(tmpProjPath('package.json')).toString());
     p['repository'] = {
       type: 'git',
@@ -23,7 +23,7 @@ describe('nx-npm e2e', () => {
     const plugin = uniq('nx-npm');
 
     await runNxCommandAsync(
-      `generate @nrwl/node:lib ${plugin} --publishable --importPath ${plugin}`,
+      `generate @nx/node:lib ${plugin} --publishable --importPath ${plugin}`,
     );
     await runNxCommandAsync(`generate @trades-org/nx-npm:npm --project ${plugin}`);
 

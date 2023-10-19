@@ -1,6 +1,6 @@
-import { readProjectConfiguration, Tree } from '@nrwl/devkit';
-import { createTreeWithEmptyWorkspace } from '@nrwl/devkit/testing';
-import { Linter } from '@nrwl/linter';
+import { readProjectConfiguration, Tree } from '@nx/devkit';
+import { createTreeWithEmptyWorkspace } from '@nx/devkit/testing';
+import { Linter } from '@nx/linter';
 import generator from './generator';
 import { ServerlessGeneratorSchema } from './schema';
 
@@ -24,9 +24,11 @@ describe('serverless generator', () => {
       await generator(appTree, options);
       const config = readProjectConfiguration(appTree, 'sample');
       expect(config).toEqual({
-        root: 'apps/sample',
+        root: 'sample',
+        $schema: '../node_modules/nx/schemas/project-schema.json',
+        name: 'sample',
         projectType: 'application',
-        sourceRoot: 'apps/sample/src',
+        sourceRoot: 'sample/src',
         targets: {
           develop: {
             executor: '@trades-org/nx-serverless:sls',
@@ -36,7 +38,7 @@ describe('serverless generator', () => {
           },
           build: {
             executor: '@trades-org/nx-serverless:sls',
-            outputs: ['../../dist/apps/sample'],
+            outputs: ['../dist/sample'],
             dependsOn: [
               {
                 target: 'build',
@@ -45,12 +47,12 @@ describe('serverless generator', () => {
             ],
             options: {
               command: 'package',
-              package: '../../dist/apps/sample',
+              package: '../dist/sample',
             },
           },
           deploy: {
             executor: '@trades-org/nx-serverless:sls',
-            outputs: ['../../dist/apps/sample'],
+            outputs: ['../dist/sample'],
             dependsOn: [
               {
                 target: 'build',
@@ -60,7 +62,7 @@ describe('serverless generator', () => {
             options: {
               command: 'deploy',
               force: true,
-              package: '../../dist/apps/sample',
+              package: '../dist/sample',
               verbose: true,
             },
             configurations: {
@@ -86,18 +88,24 @@ describe('serverless generator', () => {
             options: {},
           },
           test: {
-            executor: '@nrwl/jest:jest',
-            outputs: ['coverage/apps/sample'],
+            executor: '@nx/jest:jest',
+            configurations: {
+              ci: {
+                ci: true,
+                codeCoverage: true,
+              },
+            },
+            outputs: ['{workspaceRoot}/coverage/{projectRoot}'],
             options: {
-              jestConfig: 'apps/sample/jest.config.js',
+              jestConfig: 'sample/jest.config.ts',
               passWithNoTests: true,
             },
           },
           lint: {
-            executor: '@nrwl/linter:eslint',
+            executor: '@nx/linter:eslint',
             outputs: ['{options.outputFile}'],
             options: {
-              lintFilePatterns: ['apps/sample/src/**/*.{ts,tsx,js,jsx}'],
+              lintFilePatterns: ['./sample/src/**/*.{ts,tsx,js,jsx}'],
             },
           },
         },
@@ -120,9 +128,11 @@ describe('serverless generator', () => {
       await generator(appTree, options);
       const config = readProjectConfiguration(appTree, 'sample');
       expect(config).toEqual({
-        root: 'apps/sample',
+        root: 'sample',
+        name: 'sample',
+        $schema: '../node_modules/nx/schemas/project-schema.json',
         projectType: 'application',
-        sourceRoot: 'apps/sample/src',
+        sourceRoot: 'sample/src',
         targets: {
           develop: {
             executor: '@trades-org/nx-serverless:sls',
@@ -133,10 +143,10 @@ describe('serverless generator', () => {
           },
           build: {
             executor: '@trades-org/nx-serverless:sls',
-            outputs: ['../../dist/apps/sample'],
+            outputs: ['../dist/sample'],
             options: {
               command: 'package',
-              package: '../../dist/apps/sample',
+              package: '../dist/sample',
               buildTarget: 'sample:build:production',
             },
             dependsOn: [
@@ -148,7 +158,7 @@ describe('serverless generator', () => {
           },
           deploy: {
             executor: '@trades-org/nx-serverless:sls',
-            outputs: ['../../dist/apps/sample'],
+            outputs: ['../dist/sample'],
             dependsOn: [
               {
                 target: 'build',
@@ -158,7 +168,7 @@ describe('serverless generator', () => {
             options: {
               command: 'deploy',
               force: true,
-              package: '../../dist/apps/sample',
+              package: '../dist/sample',
               verbose: true,
               buildTarget: 'sample:build:production',
             },
@@ -185,18 +195,24 @@ describe('serverless generator', () => {
             options: {},
           },
           test: {
-            executor: '@nrwl/jest:jest',
-            outputs: ['coverage/apps/sample'],
+            executor: '@nx/jest:jest',
+            configurations: {
+              ci: {
+                ci: true,
+                codeCoverage: true,
+              },
+            },
+            outputs: ['{workspaceRoot}/coverage/{projectRoot}'],
             options: {
-              jestConfig: 'apps/sample/jest.config.js',
+              jestConfig: 'sample/jest.config.ts',
               passWithNoTests: true,
             },
           },
           lint: {
-            executor: '@nrwl/linter:eslint',
+            executor: '@nx/linter:eslint',
             outputs: ['{options.outputFile}'],
             options: {
-              lintFilePatterns: ['apps/sample/src/**/*.{ts,tsx,js,jsx}'],
+              lintFilePatterns: ['./sample/src/**/*.{ts,tsx,js,jsx}'],
             },
           },
         },

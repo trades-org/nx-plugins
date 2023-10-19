@@ -1,4 +1,4 @@
-import { ExecutorContext, runExecutor } from '@nrwl/devkit';
+import { ExecutorContext, runExecutor } from '@nx/devkit';
 import { join } from 'path';
 import { FunctionDecorator } from '../functions/function-decorator';
 import { NX_BUILD_TARGET_KEY, NX_CONTEXT_KEY } from './nx-constants';
@@ -48,7 +48,7 @@ export class NxFacade {
       this.context = JSON.parse(process.env[NX_CONTEXT_KEY]);
     } catch (e) {
       throw new Error(
-        '@nrwl/nx context not found. This is probably because you are running serverless outside nx command.',
+        'nx context not found. This is probably because you are running serverless outside nx command.',
       );
     }
   }

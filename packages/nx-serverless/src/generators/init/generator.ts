@@ -4,21 +4,19 @@ import {
   readWorkspaceConfiguration,
   Tree,
   updateWorkspaceConfiguration,
-} from '@nrwl/devkit';
-import { jestInitGenerator } from '@nrwl/jest';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
-import { setDefaultCollection } from '@nrwl/workspace/src/utilities/set-default-collection';
+} from '@nx/devkit';
+import { runTasksInSerial } from '@nx/devkit/src/generators/run-tasks-in-serial';
+import { jestInitGenerator } from '@nx/jest';
 import { InitGeneratorSchema } from './schema';
 
 export default async function serverlessInitGenerator(host: Tree, options: InitGeneratorSchema) {
   const tasks: GeneratorCallback[] = [];
 
-  setDefaultCollection(host, '@trades-org/nx-serverless');
   updateGitignore(host);
   addCacheableOperation(host);
 
   if (!options.unitTestRunner || options.unitTestRunner === 'jest') {
-    const jestTask = jestInitGenerator(host, {});
+    const jestTask = await jestInitGenerator(host, {});
     tasks.push(jestTask);
   }
 
@@ -47,7 +45,7 @@ function addCacheableOperation(tree: Tree) {
   if (
     !workspace.tasksRunnerOptions ||
     !workspace.tasksRunnerOptions.default ||
-    workspace.tasksRunnerOptions.default.runner !== '@nrwl/workspace/tasks-runners/default'
+    workspace.tasksRunnerOptions.default.runner !== 'nx/tasks-runners/default'
   ) {
     return;
   }

@@ -1,4 +1,4 @@
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext } from '@nx/devkit';
 
 export const testContext: ExecutorContext = {
   root: '/base/trades.org/tmp/nx-e2e/proj',
@@ -14,7 +14,7 @@ export const testContext: ExecutorContext = {
         targets: { build: { executor: '@trades-org/nx-serverless:build' } },
       },
     },
-    cli: { defaultCollection: '@nrwl/workspace' },
+    cli: { defaultCollection: '@nx/workspace' },
   },
   projectName: 'serverless839554',
   targetName: 'build',

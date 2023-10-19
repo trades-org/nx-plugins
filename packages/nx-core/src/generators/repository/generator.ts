@@ -4,9 +4,9 @@ import {
   generateFiles,
   Tree,
   updateJson,
-} from '@nrwl/devkit';
-import { detectPackageManager } from '@nrwl/tao/src/shared/package-manager';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+} from '@nx/devkit';
+import { runTasksInSerial } from '@nx/devkit/src/generators/run-tasks-in-serial';
+import { detectPackageManager } from 'nx/src/utils/package-manager';
 import * as path from 'path';
 import { dependencies, devDependencies } from '../../utils/dependencies';
 import { getPackageManagerInstall } from '../../utils/get-package-manager-install';

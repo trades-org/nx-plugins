@@ -1,4 +1,4 @@
-import { detectPackageManager } from '@nrwl/tao/src/shared/package-manager';
+import { detectPackageManager } from 'nx/src/utils/package-manager';
 
 export function getPackageManagerLockFile(packageManager?: 'npm' | 'yarn' | 'pnpm'): string {
   packageManager = packageManager || detectPackageManager();

@@ -5,8 +5,8 @@ import {
   names,
   offsetFromRoot,
   Tree,
-} from '@nrwl/devkit';
-import { runTasksInSerial } from '@nrwl/workspace/src/utilities/run-tasks-in-serial';
+} from '@nx/devkit';
+import { runTasksInSerial } from '@nx/devkit/src/generators/run-tasks-in-serial';
 import { normalizeOptions } from '@trades-org/nx-core';
 import * as path from 'path';
 import jestPlaywrightInitGenerator from '../init/generator';

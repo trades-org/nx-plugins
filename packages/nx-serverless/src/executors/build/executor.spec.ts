@@ -1,11 +1,11 @@
-import runCommands from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
+import runCommands from 'nx/src/executors/run-commands/run-commands.impl';
 import { testContext } from '../../utils/test-context';
 import executor from './executor';
 import { BuildExecutorSchema } from './schema';
 
 const options: BuildExecutorSchema = { outputPath: '' };
 
-jest.mock('@nrwl/workspace/src/executors/run-commands/run-commands.impl');
+jest.mock('nx/src/executors/run-commands/run-commands.impl');
 
 const runCommandsMock: jest.Mock = runCommands as any;
 const runCommandsReturn = { success: true };
@@ -26,6 +26,7 @@ describe('Build Executor', () => {
         outputPath: '',
         cwd: 'apps/serverless839554',
         color: true,
+        __unparsed__: [],
       },
       testContext,
     );
