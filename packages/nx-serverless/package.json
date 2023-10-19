@@ -2,6 +2,9 @@
   "name": "@trades-org/nx-serverless",
   "version": "0.0.0-semantic-release",
   "license": "MIT",
+  "dependencies": {
+    "@trades-org/nx-core": "^0.1.6"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/trades-org/nx-plugins.git",

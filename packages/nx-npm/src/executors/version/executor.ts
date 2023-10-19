@@ -1,4 +1,4 @@
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext } from '@nx/devkit';
 import { getProjectConfiguration } from '@trades-org/nx-core';
 import { execSync } from 'child_process';
 import { VersionExecutorSchema } from './schema';

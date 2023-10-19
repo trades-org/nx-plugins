@@ -1,6 +1,6 @@
-import { ExecutorContext } from '@nrwl/devkit';
-import runCommands from '@nrwl/workspace/src/executors/run-commands/run-commands.impl';
+import { ExecutorContext } from '@nx/devkit';
 import { getProjectConfiguration } from '@trades-org/nx-core';
+import runCommands from 'nx/src/executors/run-commands/run-commands.impl';
 
 export function runSlsHelp(context: ExecutorContext, command: string) {
   return runCommands(
@@ -8,6 +8,7 @@ export function runSlsHelp(context: ExecutorContext, command: string) {
       command: `sls ${command} --help`,
       color: true,
       cwd: getProjectConfiguration(context).root,
+      __unparsed__: [],
     },
     context,
   );

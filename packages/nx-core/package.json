@@ -1,13 +1,14 @@
 {
   "name": "@trades-org/nx-core",
-  "version": "0.0.6",
+  "version": "0.1.6",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/trades-org/nx-plugins"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/trades-org"
   },
   "main": "index.js",
   "generators": "./generators.json",

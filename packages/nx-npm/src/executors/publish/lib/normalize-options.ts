@@ -1,19 +1,26 @@
-import { ExecutorContext } from '@nrwl/devkit';
-import { readNxJson } from '@nrwl/workspace';
 import { getProjectConfiguration } from '@trades-org/nx-core';
+import { ExecutorContext, workspaceRoot } from '@nx/devkit';
+import { readJsonSync } from 'fs-extra';
 import { PublishExecutorNormalizedSchema, PublishExecutorSchema } from '../schema';
 
 export function normalizeOptions(
   options: PublishExecutorSchema,
   context: ExecutorContext,
 ): PublishExecutorNormalizedSchema {
-  const nx = readNxJson();
+  const npmScope = getNpmScope();
+
+  if (!npmScope) {
+    throw new Error('Missing npmScope in workspace');
+  }
 
   return {
     ...options,
+    npmRegistry: getNpmRegistry(options),
     npmToken: getNpmToken(options),
     pkgLocation: getPkgLocation(options, context),
-    npmScope: nx.npmScope,
+    npmScope: npmScope,
+    pkgVersion: options.pkgVersion || process.env['NPM_PACKAGE_VERSION'],
+    tag: options.tag || process.env['NPM_PACKAGE_TAG'] || 'latest',
   };
 }
 
@@ -35,4 +42,16 @@ function getNpmToken(options: PublishExecutorSchema): string {
   }
 
   return token;
+}
+
+function getNpmScope() {
+  const { name } = readJsonSync(`${workspaceRoot}/package.json`);
+
+  if (name?.startsWith('@')) {
+    return name.split('/')[0].substring(1);
+  }
+}
+
+function getNpmRegistry(options: PublishExecutorSchema) {
+  return options.npmRegistry || process.env.npm_config_registry || 'https://registry.npmjs.org/';
 }

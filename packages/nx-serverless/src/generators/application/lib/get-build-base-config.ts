@@ -1,9 +1,9 @@
-import { joinPathFragments, offsetFromRoot, TargetConfiguration } from '@nrwl/devkit';
+import { joinPathFragments, offsetFromRoot, TargetConfiguration } from '@nx/devkit';
 import { NormalizedOptions } from '@trades-org/nx-core';
 
 export function getBuildBaseConfig(options: NormalizedOptions): TargetConfiguration {
   return {
-    executor: '@nrwl/node:webpack',
+    executor: '@nx/node:webpack',
     outputs: ['{options.outputPath}'],
     options: {
       outputPath: `${offsetFromRoot(options.projectRoot)}${joinPathFragments(

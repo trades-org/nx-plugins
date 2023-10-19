@@ -1,4 +1,4 @@
-import { ensureNxProject, runCommandAsync, runNxCommandAsync } from '@nrwl/nx-plugin/testing';
+import { ensureNxProject, runCommandAsync, runNxCommandAsync } from '@nx/plugin/testing';
 
 describe('core e2e', () => {
   beforeAll(() => {

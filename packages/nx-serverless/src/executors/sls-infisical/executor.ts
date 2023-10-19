@@ -1,8 +1,7 @@
 import 'dotenv/config';
-import { ExecutorContext } from '@nrwl/devkit';
+import { ExecutorContext } from '@nx/devkit';
 import { getProjectConfiguration, stringifyArgs } from '@trades-org/nx-core';
 import * as execa from 'execa';
-import { NX_CONTEXT_KEY } from '../../../plugin/nrwl/nx-constants';
 import { printCommand } from '../../utils/print-command';
 import { SlsInfisicalExecutorSchema } from './schema';
 
@@ -28,7 +27,6 @@ export default async function runExecutor(
       FORCE_COLOR: 'true',
       NODE_OPTIONS: '--enable-source-maps',
       ...env,
-      [NX_CONTEXT_KEY]: JSON.stringify(context),
     },
   });
 

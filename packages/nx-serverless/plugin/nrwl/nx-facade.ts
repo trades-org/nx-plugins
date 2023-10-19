@@ -1,51 +1,16 @@
-import { ExecutorContext, runExecutor } from '@nrwl/devkit';
+import { ProjectGraph, readCachedProjectGraph, workspaceRoot } from '@nx/devkit';
+import * as execa from 'execa';
 import { join } from 'path';
-import { FunctionDecorator } from '../functions/function-decorator';
-import { NX_BUILD_TARGET_KEY, NX_CONTEXT_KEY } from './nx-constants';
-
-interface NxEntry {
-  /**
-   * Path to the destination within output folder
-   * @example src/handlers/create-user
-   * Example will produce output:
-   * - dist/apps/api/src/handlers/create-user.js
-   * - dist/apps/api/src/handlers/create-user.js.map
-   */
-  entryName: string;
-  /**
-   * Path to the source file within Nx Workspace
-   * @example apps/api/src/handlers/create-user.ts
-   */
-  entryPath: string;
-}
+import { NX_BUILD_TARGET_KEY } from './nx-constants';
 
 export class NxFacade {
   private readonly buildTarget: string;
-  private readonly targetDescription: {
-    project: string;
-    target: string;
-    configuration?: string;
-  };
-  private readonly context: ExecutorContext;
+  readonly outputAbsolutePath: string;
 
-  get outputAbsolutePath(): string {
-    return join(this.context.root, this.target.options.outputPath);
-  }
-
-  private get target() {
-    return this.project.targets[this.targetDescription.target];
-  }
-
-  private get project() {
-    return this.context.workspace.projects[this.targetDescription.project];
-  }
-
-  constructor(private serverless: Serverless.Instance, private logging: Serverless.Logging) {
+  constructor(private logging: Serverless.Logging) {
     try {
-      const [project, target, configuration] = process.env[NX_BUILD_TARGET_KEY].split(':');
-      this.targetDescription = { project, target, configuration };
-      this.buildTarget = process.env[NX_BUILD_TARGET_KEY];
-      this.context = JSON.parse(process.env[NX_CONTEXT_KEY]);
+      this.buildTarget = this.getBuildTarget();
+      this.outputAbsolutePath = this.getAbsoluteOutputPath();
     } catch (e) {
       throw new Error(
         '@nrwl/nx context not found. This is probably because you are running serverless outside nx command.',
@@ -53,40 +18,52 @@ export class NxFacade {
     }
   }
 
-  async build(functions: ReadonlyArray<FunctionDecorator>): Promise<void> {
-    for await (const output of await this.compile(functions, false)) {
-      if (!output.success) {
-        throw new Error('Could not compile application files');
-      }
-    }
-  }
-
-  async watch(functions: ReadonlyArray<FunctionDecorator>): Promise<void> {
-    await this.compile(functions, true).next();
-  }
-
-  private async *compile(functions: ReadonlyArray<FunctionDecorator>, watch: boolean) {
-    const additionalEntryPoints = this.generateEntries(functions);
-
+  async build(): Promise<void> {
     this.logging.log.info(`Building with nx buildTarget: "${this.buildTarget}"`);
-
-    for await (const output of await runExecutor(
-      this.targetDescription,
-      { watch, additionalEntryPoints },
-      this.context,
-    )) {
-      yield output;
-    }
+    await execa.command(`npx nx run ${this.buildTarget}`, {
+      stdio: 'inherit',
+      cwd: workspaceRoot,
+    });
   }
 
-  private generateEntries(functions: ReadonlyArray<FunctionDecorator>): NxEntry[] {
-    return functions.map((f) => this.generateEntry(f));
+  async watch(): Promise<void> {
+    this.logging.log.info(`Watching with nx buildTarget: "${this.buildTarget}"`);
+    await execa.command(`npx nx run ${this.buildTarget}`, { cwd: workspaceRoot });
+    execa.command(`npx nx run ${this.buildTarget} --watch --skip-nx-cache`, {
+      stdio: 'inherit',
+      cwd: workspaceRoot,
+    });
   }
 
-  private generateEntry(func: FunctionDecorator): NxEntry {
-    const entryName = func.pathWoExt;
-    const entryPath = join(this.project.root, func.path);
+  private getBuildTarget() {
+    return process.env[NX_BUILD_TARGET_KEY] as string;
+  }
 
-    return { entryName, entryPath };
+  private getAbsoluteOutputPath() {
+    const graph = readCachedProjectGraph();
+    const [project, target, configuration] = this.buildTarget.split(':');
+    const outputPath = this.getOption<string>(
+      graph,
+      { project, target, configuration },
+      'outputPath',
+    );
+
+    return join(workspaceRoot, outputPath);
+  }
+
+  private getOption<T>(
+    graph: ProjectGraph,
+    descriptor: { project: string; target: string; configuration: string },
+    option: string,
+  ): T {
+    const { project, target, configuration } = descriptor;
+    const targetConfiguration = graph.nodes[project].data.targets[target];
+    const defaultConfiguration = targetConfiguration.defaultConfiguration;
+    const normalizedConfiguration = configuration ?? defaultConfiguration;
+
+    return (
+      targetConfiguration.options[option] ??
+      targetConfiguration.configurations[normalizedConfiguration]?.[option]
+    );
   }
 }

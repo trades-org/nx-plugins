@@ -1,5 +1,5 @@
 import * as execa from 'execa';
-import { NX_CONTEXT_KEY } from '../../../plugin/nrwl/nx-constants';
+import { NX_BUILD_TARGET_KEY } from '../../../plugin/nrwl/nx-constants';
 import { testContext } from '../../utils/test-context';
 import executor from './executor';
 
@@ -11,6 +11,7 @@ describe('Sls Executor', () => {
   beforeEach(() => {
     jest.resetAllMocks();
     execSyncMock = jest.spyOn(execa, 'command').mockResolvedValue({ all: 'noop' } as any);
+    delete process.env['FORCE_COLOR'];
   });
 
   describe('local run', () => {
@@ -24,7 +25,7 @@ describe('Sls Executor', () => {
       expect(output).toEqual(runCommandsReturn);
       expect(execSyncMock).toHaveBeenCalledWith('sls package', {
         all: false,
-        cwd: 'apps/serverless839554',
+        cwd: 'apps/serverlessMock',
         stdio: 'inherit',
         env: expect.anything(),
       });
@@ -39,53 +40,52 @@ describe('Sls Executor', () => {
       expect(output).toEqual(runCommandsReturn);
       expect(execSyncMock).toHaveBeenCalledWith('sls deploy --foo=foo-value --bar=bar-value', {
         all: false,
-        cwd: 'apps/serverless839554',
+        cwd: 'apps/serverlessMock',
         stdio: 'inherit',
         env: expect.anything(),
       });
     });
 
-    it('should include nx context in env', async () => {
-      await executor({ command: 'package' }, testContext);
-      const { env } = execSyncMock.mock.calls[0][1];
-
-      expect(env[NX_CONTEXT_KEY]).toBe(JSON.stringify(testContext));
-    });
-
-    it('should overwrite env', async () => {
+    it('should append env', async () => {
       const fakeEnv = { foo: 'bar' };
-      const output = await executor({ command: 'package', env: fakeEnv }, testContext);
-      const fakeEnvWithNxContext = {
+      const output = await executor(
+        { command: 'package', buildTarget: 'foo:bar', env: fakeEnv },
+        testContext,
+      );
+      const expectedEnv = {
         ...fakeEnv,
         FORCE_COLOR: 'true',
-        [NX_CONTEXT_KEY]: JSON.stringify(testContext),
         NODE_OPTIONS: '--enable-source-maps',
+        [NX_BUILD_TARGET_KEY]: 'foo:bar',
       };
 
       expect(output).toEqual(runCommandsReturn);
       expect(execSyncMock).toHaveBeenCalledWith('sls package', {
         all: false,
-        cwd: 'apps/serverless839554',
+        cwd: 'apps/serverlessMock',
         stdio: 'inherit',
-        env: fakeEnvWithNxContext,
+        env: expectedEnv,
       });
     });
 
     it('env should overwrite NODE_OPTIONS', async () => {
       const fakeEnv = { foo: 'bar', NODE_OPTIONS: undefined };
-      const output = await executor({ command: 'package', env: fakeEnv }, testContext);
-      const fakeEnvWithNxContext = {
+      const output = await executor(
+        { command: 'package', buildTarget: 'foo:bar', env: fakeEnv },
+        testContext,
+      );
+      const expectedEnv = {
         ...fakeEnv,
+        [NX_BUILD_TARGET_KEY]: 'foo:bar',
         FORCE_COLOR: 'true',
-        [NX_CONTEXT_KEY]: JSON.stringify(testContext),
       };
 
       expect(output).toEqual(runCommandsReturn);
       expect(execSyncMock).toHaveBeenCalledWith('sls package', {
         all: false,
-        cwd: 'apps/serverless839554',
+        cwd: 'apps/serverlessMock',
         stdio: 'inherit',
-        env: fakeEnvWithNxContext,
+        env: expectedEnv,
       });
     });
   });

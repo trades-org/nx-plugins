@@ -1,7 +1,7 @@
 import { hasNativeZip, nativeZip, nodeZip } from 'bestzip';
-import { ensureDir } from 'fs-extra';
-import * as glob from 'glob';
-import { join } from 'path';
+import { copyFile, ensureDir } from 'fs-extra';
+import { globSync } from 'glob';
+import { dirname, join } from 'path';
 import { FunctionDecorator } from '../functions/function-decorator';
 
 export class PackagingManager {
@@ -25,11 +25,15 @@ export class PackagingManager {
     functions: ReadonlyArray<FunctionDecorator>,
     outputAbsolutePath: string,
   ) {
+    const commonAssets = this.findCommonAssets();
     await Promise.all(
       functions.map(async (func) => {
         const destination = this.generateFunctionIndividualPath(func);
+        const sourceFiles = this.findFunctionFiles(func, outputAbsolutePath);
+        const assets = [...new Set(commonAssets.concat(this.findAssets(func)))];
+        await this.putAssetsNextToFunctionFiles(assets, outputAbsolutePath);
         const args = {
-          source: this.findFunctionFiles(func, outputAbsolutePath),
+          source: sourceFiles.concat(assets),
           cwd: outputAbsolutePath,
           destination,
         };
@@ -44,15 +48,20 @@ export class PackagingManager {
     functions: ReadonlyArray<FunctionDecorator>,
     outputAbsolutePath: string,
   ) {
+    const assets = [];
     const files = [];
     const destination = this.generateFunctionCombinedPath();
     functions.forEach((func) => {
       func.setArtifactPath(destination);
-      files.push(this.findFunctionFiles(func, outputAbsolutePath));
+      files.push(...this.findFunctionFiles(func, outputAbsolutePath));
+      assets.push(...this.findAssets(func));
     });
+    assets.push(...this.findCommonAssets());
+    const uniqueAssets = [...new Set(assets)];
+    await this.putAssetsNextToFunctionFiles(uniqueAssets, outputAbsolutePath);
 
     const args = {
-      source: files,
+      source: files.concat(uniqueAssets),
       cwd: outputAbsolutePath,
       destination,
     };
@@ -60,13 +69,65 @@ export class PackagingManager {
   }
 
   private findFunctionFiles(func: FunctionDecorator, outputAbsolutePath: string): string[] {
-    return glob.sync(`${func.pathWoExt}*`, {
+    return globSync(`${func.pathWoExt}*`, {
       cwd: outputAbsolutePath,
       dot: true,
-      silent: true,
       follow: true,
       nodir: true,
     });
+  }
+
+  private findAssets(func: FunctionDecorator): string[] {
+    return this.combineGlobPatterns(this.originalServicePath, func.patterns);
+  }
+
+  private findCommonAssets(): string[] {
+    return this.combineGlobPatterns(
+      this.originalServicePath,
+      this.serverless.service.package.patterns,
+    );
+  }
+
+  private combineGlobPatterns(searchDir: string, patterns: string[]): string[] {
+    if (!patterns?.length) {
+      return [];
+    }
+
+    const include = [];
+    const exclude = [];
+    patterns.forEach((pattern) => {
+      if (pattern.startsWith('!')) {
+        exclude.push(pattern.substring(1));
+      } else {
+        include.push(pattern);
+      }
+    });
+    const assets = globSync(include, {
+      cwd: searchDir,
+      dot: true,
+      follow: true,
+      nodir: true,
+      ignore: exclude,
+    });
+
+    return [...new Set(assets)];
+  }
+
+  private async putAssetsNextToFunctionFiles(
+    assets: string[],
+    outputAbsolutePath: string,
+  ): Promise<void> {
+    if (!assets.length) {
+      return;
+    }
+    await Promise.all(
+      assets.map(async (file) => {
+        const src = join(this.originalServicePath, file);
+        const dst = join(outputAbsolutePath, file);
+        await ensureDir(dirname(dst));
+        return await copyFile(src, dst);
+      }),
+    );
   }
 
   private generateFunctionIndividualPath(func: FunctionDecorator): string {
