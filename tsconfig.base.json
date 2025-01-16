@@ -17,8 +17,6 @@
     "paths": {
       "@trades-org/nx-core": ["packages/nx-core"],
       "@trades-org/nx-core/*": ["packages/nx-core/*"],
-      "@trades-org/nx-jest-playwright": ["packages/nx-jest-playwright"],
-      "@trades-org/nx-npm": ["packages/nx-npm"],
       "@trades-org/nx-serverless": ["packages/nx-serverless"]
     }
   },
