@@ -3,20 +3,17 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/nx-core",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["packages/nx-core/**/*.ts"]
-      },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/nx-core"],
       "options": {
-        "jestConfig": "packages/nx-core/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "packages/nx-core/jest.config.js"
       }
     },
     "build": {
@@ -24,7 +21,6 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/nx-core",
-        "buildableProjectDepsInPackageJsonType": "dependencies",
         "tsConfig": "packages/nx-core/tsconfig.lib.json",
         "packageJson": "packages/nx-core/package.json",
         "main": "packages/nx-core/index.ts",
@@ -52,6 +48,5 @@
     "publish": {
       "executor": "@trades-org/nx-npm:publish"
     }
-  },
-  "tags": []
+  }
 }

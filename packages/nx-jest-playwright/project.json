@@ -3,20 +3,17 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/nx-jest-playwright",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["packages/nx-jest-playwright/**/*.ts"]
-      },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/nx-jest-playwright"],
       "options": {
-        "jestConfig": "packages/nx-jest-playwright/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "packages/nx-jest-playwright/jest.config.js"
       }
     },
     "build": {
@@ -24,7 +21,6 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/nx-jest-playwright",
-        "buildableProjectDepsInPackageJsonType": "dependencies",
         "tsConfig": "packages/nx-jest-playwright/tsconfig.lib.json",
         "packageJson": "packages/nx-jest-playwright/package.json",
         "main": "packages/nx-jest-playwright/index.ts",
@@ -52,6 +48,5 @@
     "publish": {
       "executor": "@trades-org/nx-npm:publish"
     }
-  },
-  "tags": []
+  }
 }

@@ -3,20 +3,17 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/nx-serverless",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "lint": {
       "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["packages/nx-serverless/**/*.ts"]
-      },
       "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/nx-serverless"],
       "options": {
-        "jestConfig": "packages/nx-serverless/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "packages/nx-serverless/jest.config.js"
       }
     },
     "build": {
@@ -24,7 +21,6 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/nx-serverless",
-        "buildableProjectDepsInPackageJsonType": "dependencies",
         "tsConfig": "packages/nx-serverless/tsconfig.lib.json",
         "packageJson": "packages/nx-serverless/package.json",
         "main": "packages/nx-serverless/index.ts",
@@ -66,6 +62,5 @@
         "parallel": false
       }
     }
-  },
-  "tags": []
+  }
 }
