@@ -6562,18 +6562,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@trades-org/nx-jest-playwright@workspace:packages/nx-jest-playwright":
-  version: 0.0.0-use.local
-  resolution: "@trades-org/nx-jest-playwright@workspace:packages/nx-jest-playwright"
-  languageName: unknown
-  linkType: soft
-
-"@trades-org/nx-npm@workspace:packages/nx-npm":
-  version: 0.0.0-use.local
-  resolution: "@trades-org/nx-npm@workspace:packages/nx-npm"
-  languageName: unknown
-  linkType: soft
-
 "@trades-org/nx-serverless@workspace:packages/nx-serverless":
   version: 0.0.0-use.local
   resolution: "@trades-org/nx-serverless@workspace:packages/nx-serverless"

@@ -1,17 +1,5 @@
 {
-  "npmScope": "ns3",
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx-cloud",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
-        "accessToken": "YzQ0ZjZiNmItNDVjMi00OTVkLWI0YTMtZTJjYjBhZDE0YWEwfHJlYWQtd3JpdGU=",
-        "canTrackAnalytics": false,
-        "showUsageWarnings": true,
-        "parallel": 1
-      }
-    }
-  },
+  "npmScope": "trades-org",
   "workspaceLayout": {
     "appsDir": "e2e",
     "libsDir": "packages"

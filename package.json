@@ -7,8 +7,6 @@
     "url": "https://github.com/trades-org/nx-plugins.git"
   },
   "scripts": {
-    "postinstall": "npm run tools",
-    "script": "node tools/src/scripts",
     "nx": "nx",
     "start": "nx serve",
     "build": "nx build",
@@ -31,7 +29,6 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "commit": "git-cz",
-    "tools": "tsc --project tools/src/tsconfig.json",
     "semantic-release": "semantic-release",
     "prepare": "husky install"
   },
