@@ -45,13 +45,6 @@
         ]
       }
     },
-    "publish": {
-      "executor": "@trades-org/nx-npm:publish",
-      "options": {
-        "npmRegistry": "https://npm.pkg.github.com",
-        "npmScope": "trades-org"
-      }
-    },
     "release": {
       "executor": "nx:run-commands",
       "outputs": [],
