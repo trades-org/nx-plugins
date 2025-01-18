@@ -61,6 +61,7 @@
     "@nx/plugin": "20.3.1",
     "@nx/workspace": "20.3.1",
     "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/fs-extra": "^11.0.3",
     "@types/jest": "29.5.14",
     "@types/lodash": "^4.14.200",

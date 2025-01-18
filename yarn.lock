@@ -4827,6 +4827,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@semantic-release/git@npm:^10.0.1":
+  version: 10.0.1
+  resolution: "@semantic-release/git@npm:10.0.1"
+  dependencies:
+    "@semantic-release/error": "npm:^3.0.0"
+    aggregate-error: "npm:^3.0.0"
+    debug: "npm:^4.0.0"
+    dir-glob: "npm:^3.0.0"
+    execa: "npm:^5.0.0"
+    lodash: "npm:^4.17.4"
+    micromatch: "npm:^4.0.0"
+    p-reduce: "npm:^2.0.0"
+  peerDependencies:
+    semantic-release: ">=18.0.0"
+  checksum: 1224b7508a2e471e4d99f65685bcccc305aa40820e12c9bc1d15e087dd47adf4339e574a29072e5c3428a4bd4b630d9ea5d37933e91e8c4de89c586d8c76873e
+  languageName: node
+  linkType: hard
+
 "@semantic-release/github@npm:^8.0.0":
   version: 8.1.0
   resolution: "@semantic-release/github@npm:8.1.0"
@@ -18746,6 +18764,7 @@ __metadata:
     "@nx/plugin": "npm:20.3.1"
     "@nx/workspace": "npm:20.3.1"
     "@semantic-release/changelog": "npm:^6.0.3"
+    "@semantic-release/git": "npm:^10.0.1"
     "@types/fs-extra": "npm:^11.0.3"
     "@types/jest": "npm:29.5.14"
     "@types/lodash": "npm:^4.14.200"
