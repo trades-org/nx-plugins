@@ -1,6 +1,5 @@
-import { GeneratorCallback, joinPathFragments, Tree, updateJson } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/devkit/src/generators/run-tasks-in-serial';
-import { Linter, lintProjectGenerator } from '@nx/linter';
+import { GeneratorCallback, joinPathFragments, runTasksInSerial, Tree } from '@nx/devkit';
+import { lintProjectGenerator } from '@nx/eslint';
 import { ServerlessGeneratorNormalizedSchema } from './normalized-options';
 
 export async function addLinting(
@@ -14,13 +13,6 @@ export async function addLinting(
     eslintFilePatterns: [`${options.projectRoot}/src/**/*.{ts,tsx,js,jsx}`],
     skipFormat: true,
   });
-
-  if (options.linter === Linter.EsLint) {
-    updateJson(host, joinPathFragments(options.projectRoot, '.eslintrc.json'), (json) => {
-      json.extends = [...json.extends];
-      return json;
-    });
-  }
 
   return runTasksInSerial(lintTask);
 }

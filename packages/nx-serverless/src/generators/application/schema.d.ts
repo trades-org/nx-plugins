@@ -1,7 +1,7 @@
-import { Linter } from '@nx/linter';
+import { Linter } from '@nx/eslint';
 
 export interface ServerlessGeneratorSchema {
-  plugin: 'serverless-bundle' | '@trades-org/nx-serverless/plugin';
+  plugin: 'serverless-esbuild' | '@trades-org/nx-serverless/plugin';
   name: string;
   tags?: string;
   directory?: string;

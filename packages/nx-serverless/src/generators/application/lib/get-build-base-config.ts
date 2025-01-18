@@ -1,26 +1,27 @@
-import { joinPathFragments, offsetFromRoot, TargetConfiguration } from '@nx/devkit';
+import { joinPathFragments, TargetConfiguration } from '@nx/devkit';
 import { NormalizedOptions } from '@trades-org/nx-core';
 
 export function getBuildBaseConfig(options: NormalizedOptions): TargetConfiguration {
   return {
-    executor: '@nx/node:webpack',
+    executor: '@nx/webpack:webpack',
     outputs: ['{options.outputPath}'],
     options: {
-      outputPath: `${offsetFromRoot(options.projectRoot)}${joinPathFragments(
-        'dist',
-        options.projectRoot,
-      )}`,
-      main: joinPathFragments(options.projectRoot, 'src', 'main.ts'),
+      main: 'noop',
+      outputPath: joinPathFragments('dist', options.projectRoot),
       tsConfig: joinPathFragments(options.projectRoot, 'tsconfig.app.json'),
-      externalDependencies: 'all',
+      externalDependencies: 'none',
+      target: 'node',
+      compiler: 'tsc',
+      webpackConfig: joinPathFragments(options.projectRoot, 'webpack.config.js'),
     },
     configurations: {
+      development: {},
       production: {
         optimization: true,
         extractLicenses: true,
         inspect: false,
-        externalDependencies: 'none',
       },
     },
+    defaultConfiguration: 'production',
   };
 }

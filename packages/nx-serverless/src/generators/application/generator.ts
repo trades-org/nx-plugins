@@ -4,11 +4,11 @@ import {
   generateFiles,
   names,
   offsetFromRoot,
+  runTasksInSerial,
   Tree,
   updateJson,
 } from '@nx/devkit';
-import { runTasksInSerial } from '@nx/devkit/src/generators/run-tasks-in-serial';
-import { devDependencies, normalizeOptions } from '@trades-org/nx-core';
+import { normalizeOptions } from '@trades-org/nx-core';
 import { join } from 'path';
 import serverlessInitGenerator from '../init/generator';
 import { addJest } from './lib/add-jest';
@@ -44,21 +44,20 @@ function addFiles(host: Tree, options: ServerlessGeneratorNormalizedSchema) {
     ...names(options.projectName),
     offsetFromRoot: offsetFromRoot(options.projectRoot),
     tmpl: '',
-    serverlessVersion: devDependencies['serverless'],
-    serverlessDeploymentBucketVersion: devDependencies['serverless-deployment-bucket'],
-    serverlessOfflineVersion: devDependencies['serverless-offline'],
-    serverlessBundleVersion: devDependencies['@trades-org/serverless-bundle'],
   };
 
-  generateFiles(host, join(__dirname, 'files'), options.projectRoot, templateOptions);
+  generateFiles(host, join(__dirname, 'files', 'core'), options.projectRoot, templateOptions);
+  if (options.plugin === '@trades-org/nx-serverless/plugin') {
+    generateFiles(host, join(__dirname, 'files', 'plugin'), options.projectRoot, templateOptions);
+  }
 }
 
 function updateTsConfig(tree: Tree, options: ServerlessGeneratorNormalizedSchema) {
   updateJson(tree, join(options.projectRoot, 'tsconfig.json'), (json) => {
     json.compilerOptions = {
       ...json.compilerOptions,
-      lib: ['es2020'],
-      target: 'es2020',
+      lib: ['es2023'],
+      target: 'es2022',
     };
 
     if (options.strict) {
