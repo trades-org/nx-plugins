@@ -4789,6 +4789,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@semantic-release/changelog@npm:^6.0.3":
+  version: 6.0.3
+  resolution: "@semantic-release/changelog@npm:6.0.3"
+  dependencies:
+    "@semantic-release/error": "npm:^3.0.0"
+    aggregate-error: "npm:^3.0.0"
+    fs-extra: "npm:^11.0.0"
+    lodash: "npm:^4.17.4"
+  peerDependencies:
+    semantic-release: ">=18.0.0"
+  checksum: 99ff9a528ec018699d6a197e12d86a95968dafd204b9aab05c2339b229877e38f7cfcdcafe94422b3082b6eb871d2071e0d034a015f64d9984e41a4e2dac840a
+  languageName: node
+  linkType: hard
+
 "@semantic-release/commit-analyzer@npm:^9.0.2":
   version: 9.0.2
   resolution: "@semantic-release/commit-analyzer@npm:9.0.2"
@@ -18731,6 +18745,7 @@ __metadata:
     "@nx/node": "npm:20.3.1"
     "@nx/plugin": "npm:20.3.1"
     "@nx/workspace": "npm:20.3.1"
+    "@semantic-release/changelog": "npm:^6.0.3"
     "@types/fs-extra": "npm:^11.0.3"
     "@types/jest": "npm:29.5.14"
     "@types/lodash": "npm:^4.14.200"
