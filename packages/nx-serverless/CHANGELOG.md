@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/trades-org/nx-plugins/compare/nx-serverless-v1.2.0...nx-serverless-v1.3.0) (2025-01-18)
+
+
+### Features
+
+* upgrade nx to 20 ([25fb6c0](https://github.com/trades-org/nx-plugins/commit/25fb6c01738457cabaaeb2ddb19eae22d20b0b4a))
+
 # [1.2.0](https://github.com/trades-org/nx-plugins/compare/nx-serverless-v1.1.1...nx-serverless-v1.2.0) (2023-10-23)
 
 
