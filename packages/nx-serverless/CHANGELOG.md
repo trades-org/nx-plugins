@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/trades-org/nx-plugins/compare/nx-serverless-v1.3.0...nx-serverless-v1.3.1) (2025-01-19)
+
+
+### Bug Fixes
+
+* remove testing ([9cc351f](https://github.com/trades-org/nx-plugins/commit/9cc351f2650580009e1030097c285026c3bfcfe6))
+
 # [1.3.0](https://github.com/trades-org/nx-plugins/compare/nx-serverless-v1.2.0...nx-serverless-v1.3.0) (2025-01-18)
 
 
