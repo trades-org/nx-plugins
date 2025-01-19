@@ -2,13 +2,20 @@
   "name": "@trades-org/nx-core",
   "version": "0.0.1",
   "license": "MIT",
+  "dependencies": {
+    "@nx/devkit": "20.0.3",
+    "colorette": "^2.0.20",
+    "flat": "^5.0.2",
+    "nx": "20.0.3",
+    "tslib": "^2.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/trades-org/nx-plugins.git",
     "directory": "packages/nx-serverless"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
     "registry": "https://npm.pkg.github.com/trades-org"
   },
   "engines": {
@@ -16,12 +23,5 @@
   },
   "main": "index.js",
   "generators": "./generators.json",
-  "executors": "./executors.json",
-  "dependencies": {
-    "@nx/devkit": "20.0.3",
-    "colorette": "^2.0.20",
-    "flat": "^5.0.2",
-    "nx": "20.0.3",
-    "tslib": "^2.4.0"
-  }
+  "executors": "./executors.json"
 }
