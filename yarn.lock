@@ -5694,7 +5694,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@trades-org/nx-core@npm:^0.0.1, @trades-org/nx-core@workspace:packages/nx-core":
+"@trades-org/nx-core@npm:^1.0.0, @trades-org/nx-core@workspace:packages/nx-core":
   version: 0.0.0-use.local
   resolution: "@trades-org/nx-core@workspace:packages/nx-core"
   dependencies:
@@ -5710,7 +5710,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@trades-org/nx-serverless@workspace:packages/nx-serverless"
   dependencies:
-    "@trades-org/nx-core": "npm:^0.0.1"
+    "@trades-org/nx-core": "npm:^1.0.0"
   languageName: unknown
   linkType: soft
 
