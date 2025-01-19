@@ -1,6 +1,6 @@
 {
   "extends": "../../.eslintrc.json",
-  "ignorePatterns": ["!**/*"],
+  "ignorePatterns": ["!**/*", "**/node_modules/"],
   "rules": {
     "@typescript-eslint/no-explicit-any": "warn"
   },
