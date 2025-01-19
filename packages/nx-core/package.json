@@ -9,6 +9,7 @@
   },
   "publishConfig": {
     "access": "public"
+    "registry": "https://npm.pkg.github.com/trades-org"
   },
   "engines": {
     "node": ">=16.6.0"
