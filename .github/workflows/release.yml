@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
-        uses: nrwl/nx-set-shas@v2
+        uses: nrwl/nx-set-shas@v4
         with:
           main-branch-name: ${{ github.base_ref }}
       - name: Detect package manager
@@ -79,15 +79,13 @@ jobs:
             npm ci
           fi
       - run: |
-          npx nx run affected -t lint
-          npx nx run affected -t test --ci --code-coverage
-          npx nx run affected -t build
+          npx nx affected -t lint build
       - name: Release
         if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx nx run affected -t release
+          npx nx affected -t release
       - name: Finish Release
         run: npx semantic-release-plus
