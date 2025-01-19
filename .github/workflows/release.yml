@@ -79,15 +79,15 @@ jobs:
             npm ci
           fi
       - run: |
-          npx nx run nx-serverless:lint
-          npx nx run nx-serverless:test --ci --code-coverage
-          npx nx run nx-serverless:build
+          npx nx run affected -t lint
+          npx nx run affected -t test --ci --code-coverage
+          npx nx run affected -t build
       - name: Release
         if: ${{ success() && (github.event_name != 'pull_request' || github.event.action == 'closed' && github.event.pull_request.merged == true) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx nx run nx-serverless:release
+          npx nx run affected -t release
       - name: Finish Release
         run: npx semantic-release-plus

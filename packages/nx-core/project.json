@@ -46,8 +46,15 @@
         ]
       }
     },
-    "publish": {
-      "executor": "@trades-org/nx-npm:publish"
+    "release": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "commands": [
+          "npx semantic-release-plus --extends ./packages/nx-core/release.config.js"
+        ],
+        "parallel": false
+      }
     }
   },
   "tags": []
